@@ -24,7 +24,6 @@ export default function HomePage() {
       });
   }, []);
 
-  console.log(trendingMovies);
   return (
     <>
       {status === "pending" && (

@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink, Route, useRouteMatch } from "react-router-dom";
 import styles from "./MoviesDetailsPage.module.css";
 import * as API from "../../services/moviedb-api";
+import Cast from "../Cast/Cast";
+import Reviews from "../Reviews/Reviews";
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const { url } = useRouteMatch();
 
   useEffect(() => {
     API.getMovieDetails(movieId).then(setMovie);
@@ -13,7 +16,6 @@ export default function MovieDetailsPage() {
 
   return (
     <>
-      <p>{movieId}</p>
       {movie && (
         <>
           {movie.poster_path ? (
@@ -37,10 +39,25 @@ export default function MovieDetailsPage() {
           <h3>Genres</h3>
           <ul>
             {movie.genres.map((genre) => (
-              <li>{genre.name}</li>
+              <li key={genre.id}>{genre.name}</li>
             ))}
           </ul>
           <h4>Additional Information</h4>
+          <ul>
+            <li>
+              <NavLink to={`${url}/cast`}>Cast</NavLink>
+            </li>
+            <li>
+              <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+            </li>
+          </ul>
+          <hr />
+          <Route path="/movies/:movieId/cast">
+            {<Cast movieId={movieId} />}
+          </Route>
+          <Route path="/movies/:movieId/reviews">
+            {<Reviews movieId={movieId} />}
+          </Route>
         </>
       )}
     </>
