@@ -6,21 +6,25 @@ import HomePage from "./views/HomePage/HomePage";
 import MoviesPage from "./views/MoviesPage/MoviesPage";
 
 // import BooksView from "./views/BooksView";
-// import BookDetailsView from "./views/BookDetailsView";
+import MovieDetailsPage from "./views/MoviesDetailsPage/MoviesDetailsPage";
 // import NotFoundView from "./views/NotFoundView";
 
 export default function App() {
   return (
     <Container>
       <AppBar />
+      <Switch>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
 
-      <Route path="/" exact>
-        <HomePage />
-      </Route>
-
-      <Route path="/movies">
-        <MoviesPage />
-      </Route>
+        <Route path="/movies/:movieId">
+          <MovieDetailsPage />
+        </Route>
+        <Route path="/movies">
+          <MoviesPage />
+        </Route>
+      </Switch>
       {/* <AppBar />
 
       <Switch>
