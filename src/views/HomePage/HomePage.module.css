@@ -1,0 +1,22 @@
+.list {
+  list-style: none;
+}
+
+.listItem {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.link {
+  text-decoration: none;
+  color: #023a5f;
+}
+
+.link:visited {
+  color: #2196f3;
+}
+
+.link:focus,
+.link:hover {
+  font-size: 18px;
+}

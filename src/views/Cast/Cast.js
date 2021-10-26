@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as API from "../../services/moviedb-api";
+import styles from "./Cast.module.css";
 
-export default function Cast({ movies }) {
+export default function Cast({ movieId }) {
   const [cast, setCast] = useState(null);
-  const { movieId } = useParams();
+  // const { movieId } = useParams();
 
   useEffect(() => {
     API.getMovieCast(movieId).then((response) => {
@@ -15,10 +16,10 @@ export default function Cast({ movies }) {
   return (
     <>
       {cast && (
-        <ul>
+        <ul className={styles.list}>
           {cast.map((cast) => {
             return (
-              <li key={cast.id}>
+              <li className={styles.listItem} key={cast.id}>
                 {cast.profile_path ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w300${cast.profile_path}`}
@@ -32,8 +33,8 @@ export default function Cast({ movies }) {
                     width="100px"
                   ></img>
                 )}
-
-                {cast.name}
+                <h4 className={styles.namehead}>{cast.name}</h4>
+                <p className={styles.text}>Character: {cast.character}</p>
               </li>
             );
           })}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as API from "../../services/moviedb-api";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -8,7 +8,6 @@ import ErrorView from "../../components/ErrorView/ErrorView";
 import styles from "./HomePage.module.css";
 
 export default function HomePage() {
-  const { url } = useRouteMatch();
   const [trendingMovies, setTrendingMovies] = useState(null);
   const [status, setStatus] = useState("idle");
 
@@ -37,11 +36,13 @@ export default function HomePage() {
       )}
       {status === "rejected" && <ErrorView />}
       {status === "resolved" && (
-        <ul>
+        <ul className={styles.list}>
           {trendingMovies.map((movie) => {
             return (
-              <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
+              <li key={movie.id} className={styles.listItem}>
+                <Link to={`/movies/${movie.id}`} className={styles.link}>
+                  {movie.original_title}
+                </Link>
               </li>
             );
           })}

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as API from "../../services/moviedb-api";
+import styles from "./Reviews.module.css";
 
 export default function Reviews({ movies }) {
   const [reviews, setReviews] = useState(null);
@@ -15,7 +16,7 @@ export default function Reviews({ movies }) {
   return (
     <>
       {reviews && (
-        <ul>
+        <ul className={styles.list}>
           {reviews.map((review) => {
             return (
               <li key={review.id}>
