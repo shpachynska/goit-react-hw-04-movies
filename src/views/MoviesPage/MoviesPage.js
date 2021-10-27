@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import * as API from "../../services/moviedb-api";
 import Loader from "react-loader-spinner";
@@ -15,6 +15,9 @@ export default function MoviesPage() {
 
   const history = useHistory();
   const location = useLocation();
+  const { url } = useRouteMatch();
+  console.log(location);
+
   const searchRequest = new URLSearchParams(location.search).get("q");
 
   const handleInputSubmit = (userInput) => {
@@ -65,7 +68,7 @@ export default function MoviesPage() {
                 <Link
                   className={styles.link}
                   to={{
-                    pathname: `/movies/${item.id}`,
+                    pathname: `${url}/${item.id}`,
                     state: { from: location },
                   }}
                 >

@@ -27,13 +27,18 @@ export default function MovieDetailsPage() {
   const history = useHistory();
   // console.log("location state: ", location.state.from.state);
   // console.log("history: ", history);
+  const [locationState, setLocationState] = useState(null);
 
   useEffect(() => {
     API.getMovieDetails(movieId).then(setMovie);
   }, [movieId]);
 
+  useEffect(() => {
+    location?.state?.from && setLocationState(location.state.from);
+  }, [location]);
+
   const onGoBack = () => {
-    history.push(location?.state?.from ?? "/");
+    history.push(locationState ?? "/");
   };
 
   return (
@@ -78,7 +83,7 @@ export default function MovieDetailsPage() {
                 className={styles.link}
                 to={{
                   pathname: `${url}/cast`,
-                  state: { from: location },
+                  state: { from: locationState },
                 }}
               >
                 Cast
@@ -89,7 +94,7 @@ export default function MovieDetailsPage() {
                 className={styles.link}
                 to={{
                   pathname: `${url}/reviews`,
-                  state: { from: location },
+                  state: { from: locationState },
                 }}
               >
                 Reviews

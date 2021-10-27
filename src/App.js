@@ -30,7 +30,7 @@ export default function App() {
           <Route path="/movies/:movieId">
             <MovieDetailsPage />
           </Route>
-          <Route path="/movies">
+          <Route path="/movies" exact>
             <MoviesPage />
           </Route>
         </Switch>
